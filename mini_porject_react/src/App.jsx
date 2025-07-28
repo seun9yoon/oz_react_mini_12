@@ -13,7 +13,7 @@ function App() {
         Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`
       }};
 
-    fetch('https://api.themoviedb.org/3/movie/popular', options)
+    fetch('https://api.themoviedb.org/3/movie/popular?language=ko-KR', options)
     .then(res => res.json())
     .then(res => {
       setmovies(res.results.filter(el => !el.adult))
@@ -21,6 +21,7 @@ function App() {
     })
     .catch(err => console.error(err));
   }, [])
+
 
   return (
     <div className='bg-[black]'>
