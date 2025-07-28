@@ -1,25 +1,43 @@
-import { useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import MovieCard from './component/MovieCard';
-import movieListData from './data/movieListData.json';
 import {Route, Routes } from 'react-router-dom';
 import Detalil from './pages/Detail';
 import Layout from './component/Layout';
 
 function App() {
-  const [movies] = useState(movieListData.results);
+  const [movies, setmovies] = useState([]);
+
+  useEffect(() => {
+    const options = {method: 'GET',
+      headers: {accept: 'application/json',
+        Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`
+      }};
+
+    fetch('https://api.themoviedb.org/3/movie/popular?language=ko-KR', options)
+    .then(res => res.json())
+    .then(res => {
+      setmovies(res.results.filter(el => !el.adult))
+      console.log(res)
+    })
+    .catch(err => console.error(err));
+  }, [])
+
+  if (movies.length === 0) {
+  return <div className=" text-black text-[32px]">영화 정보를 불러오는 중입니다...</div>;
+  }
 
   return (
     <div className='bg-[black]'>
-      <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route index element={<div className='flex flex-wrap gap-[10px] p-[10px]'>
-            {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </div>} />
-          <Route path='detail/:id' element={<Detalil movies={movies}/>} />
-          </Route>
-      </Routes>
+        <Routes>
+          <Route path='/' element={<Layout/>}>
+            <Route index element={<div className='flex flex-wrap gap-[10px] p-[10px]'>
+              {movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </div>} />
+            <Route path='detail/:id' element={<Detalil movies={movies}/>} />
+            </Route>
+        </Routes>
     </div>
   );
 };
