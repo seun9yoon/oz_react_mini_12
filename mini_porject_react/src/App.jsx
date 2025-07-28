@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import MovieCard from './component/MovieCard';
 import {Route, Routes } from 'react-router-dom';
 import Detalil from './pages/Detail';
@@ -22,19 +22,22 @@ function App() {
     .catch(err => console.error(err));
   }, [])
 
+  if (movies.length === 0) {
+  return <div className=" text-black text-[32px]">영화 정보를 불러오는 중입니다...</div>;
+  }
 
   return (
     <div className='bg-[black]'>
-      <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route index element={<div className='flex flex-wrap gap-[10px] p-[10px]'>
-            {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </div>} />
-          <Route path='detail/:id' element={<Detalil movies={movies}/>} />
-          </Route>
-      </Routes>
+        <Routes>
+          <Route path='/' element={<Layout/>}>
+            <Route index element={<div className='flex flex-wrap gap-[10px] p-[10px]'>
+              {movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </div>} />
+            <Route path='detail/:id' element={<Detalil movies={movies}/>} />
+            </Route>
+        </Routes>
     </div>
   );
 };
