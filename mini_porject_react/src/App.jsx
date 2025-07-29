@@ -1,8 +1,13 @@
 import { Suspense, useEffect, useState } from 'react';
 import MovieCard from './component/MovieCard';
 import {Route, Routes } from 'react-router-dom';
-import Detalil from './pages/Detail';
+import Detail from './pages/Detail';
 import Layout from './component/Layout';
+import Search from './pages/Search';
+import './App.scss'
+import Login from './pages/login';
+import Join from './pages/join';
+
 
 function App() {
   const [movies, setmovies] = useState([]);
@@ -27,7 +32,7 @@ function App() {
   }
 
   return (
-    <div className='bg-[black]'>
+    <div className='bg-[black] flex flex-col justify-center items-center h-full'>
         <Routes>
           <Route path='/' element={<Layout/>}>
             <Route index element={<div className='flex flex-wrap gap-[10px] p-[10px]'>
@@ -35,8 +40,11 @@ function App() {
                 <MovieCard key={movie.id} movie={movie} />
               ))}
             </div>} />
-            <Route path='detail/:id' element={<Detalil movies={movies}/>} />
-            </Route>
+            <Route path='detail/:id' element={<Detail movies={movies}/>} />
+            <Route path='search' element={<Search movies={movies}/>} />
+            <Route path='login' element={<Login />} />
+            <Route path='join' element={<Join />} />
+          </Route>
         </Routes>
     </div>
   );

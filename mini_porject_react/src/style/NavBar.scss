@@ -1,0 +1,85 @@
+.nav{
+    width: 100%;
+    .nav_container{
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        color: white;
+        background-color: #312A2E;
+    }
+    .logo{
+        font-size: 32px;
+        line-height: 1;
+    }
+    .nav_input{
+        display: block;
+        color: black;
+        border-radius: 50px;
+        width: 50%;
+        padding: 0 5px
+    }
+    .nav_button{
+        display: flex;
+        gap: 8px;
+        .mobile_input{
+            font-size: 1.3rem;
+            justify-content: center;
+            align-items: center;
+            display: none;
+            user-select: none;
+            cursor: pointer;
+        }
+        .nav_login{
+                border-radius: 3px;
+                padding: 3px;
+                background-color: #6346AE;
+        }
+            .nav_join{
+                border-radius: 3px;
+                padding: 3px;
+                background-color: #6346AE;
+        }
+    }
+}
+.second_input_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .second_input{
+        margin: 10px;
+        padding: 5px;
+        display: none;
+        width: 80%;
+        height: 30px;
+        border-radius: 50px;
+    }
+}
+
+
+@media screen and (max-width: 600px){
+    .nav_input{
+        display: none !important;
+    }
+    .nav_button{
+        .mobile_input{
+            display: block !important;
+        }
+        .nav_join{
+            display: none;
+        }
+    }
+    .second_input_container{
+        .second_input{
+            display: block !important;
+        }
+    }
+}
+
+//태블릿
+@media screen and (min-width:601px) and (max-width: 1024px){
+    .nav_button{
+        .nav_join{
+            display: none;
+        }
+    }
+}
