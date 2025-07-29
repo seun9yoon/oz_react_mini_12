@@ -14,7 +14,7 @@ export default function Login(){
             </form>
             <button 
             className='join_button'
-            onClick={() => navigate('/join')}>회원가입</button>
+            onClick={() => navigate('/signup')}>회원가입</button>
         </div>
     )
 }

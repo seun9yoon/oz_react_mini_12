@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieCard from './component/MovieCard';
 import {Route, Routes } from 'react-router-dom';
 import Detail from './pages/Detail';
@@ -6,7 +6,7 @@ import Layout from './component/Layout';
 import Search from './pages/Search';
 import './App.scss'
 import Login from './pages/login';
-import Join from './pages/join';
+import Signup from './pages/signup';
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
             <Route path='detail/:id' element={<Detail movies={movies}/>} />
             <Route path='search' element={<Search movies={movies}/>} />
             <Route path='login' element={<Login />} />
-            <Route path='join' element={<Join />} />
+            <Route path='signup' element={<Signup />} />
           </Route>
         </Routes>
     </div>

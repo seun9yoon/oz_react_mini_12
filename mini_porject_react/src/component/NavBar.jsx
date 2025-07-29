@@ -18,7 +18,7 @@ export default function Navbar(){
         //location -> 현재 브라우저의 정보 / pathname -> ?이전까지의 경로만 문자열로
         if (location.pathname.startsWith("/detail")) return;
         if (location.pathname.startsWith("/login")) return;
-        if (location.pathname.startsWith("/join")) return;
+        if (location.pathname.startsWith("/signup")) return;
         if(debounce.length > 0){
             navigate(`search?movie=${debounce}`);
         }else{
@@ -39,7 +39,7 @@ export default function Navbar(){
                 <div className="mobile_input"
                 onClick={() => setSecondInput(prev => !prev)}>🔎</div>
                 <Link to={'/login'} className="nav_login">로그인</Link>
-                <Link to={'/join'} className="nav_join">회원가입</Link>
+                {/* <Link to={'/signup'} className="nav_signup">회원가입</Link> */}
             </div>
         </div>
         {/* 돋보기 클릭시 검색창 활성화 */}

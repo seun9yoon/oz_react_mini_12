@@ -13,8 +13,7 @@ export default function Search(){
             Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`
         }};
     
-        fetch( param ? `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(param)}&language=ko-KR&page=1`
-        : `https://api.themoviedb.org/3/movie/popular?language=ko-KR`, options)
+        fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(param)}&language=ko-KR&page=1`, options)
         .then(res => res.json())
         .then(res => {
             setMovies(res.results)
