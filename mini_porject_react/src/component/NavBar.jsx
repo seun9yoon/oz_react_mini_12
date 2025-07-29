@@ -11,7 +11,7 @@ export default function Navbar(){
     const debounce = useDebounce(movieName, 1000);
     
     useEffect(() => {
-        //디테일 페이지로 안들어가지는 오류 발생. 
+        //디테일 페이지로 안들어가지는 문제 발생. 
         //검색어를 입력 후 디테일 페이지를 누르면 debounce.length > 0로 인해서 계속해서
         //navigate(`search?movie=${debounce}`);가 덮어씌이게됨. 콘솔로그로 찍히는 것은 확인.
         //아래 코드를 통해 디테일 페이지 진입시 리턴을 통해 코드를 빠져나감
