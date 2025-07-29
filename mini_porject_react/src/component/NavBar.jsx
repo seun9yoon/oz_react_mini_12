@@ -10,6 +10,10 @@ export default function Navbar(){
     const [movieName, setMovieName] =  useState("");
     const debounce = useDebounce(movieName, 1000);
     
+    const [isLogIn, setIsLogIn] = useState(true);
+    const [showBox, setShowBox] = useState(false)
+
+
     useEffect(() => {
         //디테일 페이지로 안들어가지는 오류 발생. 
         //검색어를 입력 후 디테일 페이지를 누르면 debounce.length > 0로 인해서 계속해서
@@ -38,10 +42,32 @@ export default function Navbar(){
             <div className="nav_button">
                 <div className="mobile_input"
                 onClick={() => setSecondInput(prev => !prev)}>🔎</div>
-                <Link to={'/login'} className="nav_login">로그인</Link>
-                {/* <Link to={'/signup'} className="nav_signup">회원가입</Link> */}
+
+                {isLogIn ? (
+                    <div className="nav_profile">
+                        <div className="avatar" onClick={() => setShowBox(prev => !prev)}>U</div>
+
+                    {showBox && (
+                        <div className="menu">
+                    <div
+                    className="menu_item"
+                    onClick={() => {
+                        setIsLogIn(false); // 임시 로그아웃 처리
+                        setShowBox(false);
+                        navigate("/");
+                    }}
+                    >
+                    로그아웃
+                    </div>
+                </div>
+                    )}
+                    </div>) : (
+                    <Link to={'/login'} className="nav_login">로그인</Link>
+                )}
+
             </div>
         </div>
+
         {/* 돋보기 클릭시 검색창 활성화 */}
         <div className="second_input_container">
             {secondInput ? 
