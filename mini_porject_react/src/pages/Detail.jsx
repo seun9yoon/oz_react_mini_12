@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import '../style/Detail.scss'
 
 export default function Detalil() {
     const {id} = useParams()
     const [movieDetail, setMovieDetail] =useState(null)
 
+    console.log("useParams id", id);
     useEffect(() => {
         const options = {method: 'GET',
         headers: {accept: 'application/json',
@@ -19,7 +20,7 @@ export default function Detalil() {
             setMovieDetail(res)
         })
         .catch(err => console.error(err));
-    }, [])
+    }, [id])
 
     console.log("movieDetail", movieDetail)
     if (!movieDetail) {
@@ -29,18 +30,18 @@ export default function Detalil() {
 
     return(
         <>
-            <div className="flex gap-[10px] p-[20px] text-[white] h-screen">
+            <div className="detail_container">
                 <img src ={ `https://image.tmdb.org/t/p/w500/${movieDetail.poster_path}`}
                 alt={`${movieDetail.title}`}
-                className="w-[300px] h-[450px]" />
-                <div className="flex flex-col gap-[10px]">
-                    <div className="flex justify-between items-center">
-                        <div className="text-[32px]">{movieDetail.title}</div>
+                className="poster" />
+                <div className="info_container">
+                    <div className="title_container">
+                        <div className="title">{movieDetail.title}</div>
                         <div>평점: {movieDetail.vote_average}⭐</div>
                     </div>
-                    <div className="flex flex-row justify-around">
+                    <div className="genres">
                         {movieDetail.genres.map(
-                            genre => (<span key={genre.id} className="p-[10px] w-auto border rounded">
+                            genre => (<span key={genre.id} className="genre">
                                 {genre.name}
                             </span>))}
                     </div>
